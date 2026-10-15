@@ -11,7 +11,7 @@
 ## story / bug
 
 1. 관련 코드를 조사한다.
-2. `templates/design.md`로 `design.md`를 작성한다. bug는 원인과 수정 방법이 자명하면 생략할 수 있다.
+2. `templates/design.md`로 `design.md`를 작성한다. 비밀 값·개인정보를 다루면 `## 리스크`에 노출 경로와 대책을 적는다(`rules.md`의 `## 보안 정보`). bug는 원인과 수정 방법이 자명하면 생략할 수 있다.
 3. `templates/subtasks.md`로 `subtasks.md`를 작성한다.
    - Sub-task 1개 = 세션 1회 = 커밋 1개. 서로 무관한 영역은 나눈다.
    - 각 Sub-task에 `refs`, `blocked_by`, `files`, `verify`를 채운다. `verify`에는 principles의 검증 명령을 기준으로 실제 실행 가능한 명령을 쓴다. `rules.md`의 `## 데이터베이스`에 따라 에이전트가 실행할 수 없는 확인(DB 상태 확인 등)은 `manual: <확인 쿼리 파일 또는 절차>`로 쓴다.
@@ -35,5 +35,5 @@
 1. `gates.md`의 approved→planned 검사를 수행한다. 실패하면:
    - 기계적 결함(refs 누락, verify 누락, 존재하지 않는 키 참조, 순환)은 고친다.
    - 계획 검토의 차단 이슈나 미결정 항목은 `plan-review.md` 3절의 해결 절차를 따른다.
-2. 설계 요지와 Sub-task 목록(키, 제목, refs, blocked_by)을 보여주고 AskUserQuestion으로 확인받는다.
+2. `rules.md`의 `## 보안 정보` 유출 검사를 이 Spec 폴더 파일(design.md, Sub-task, `queries/`)에 대해 수행한다. 그다음 설계 요지와 Sub-task 목록(키, 제목, refs, blocked_by)을 보여주고 AskUserQuestion으로 확인받는다.
 3. 확인되면 `status: planned`로 바꾸고 `## 변경 이력`에 `[승인] approved→planned`(Sub-task 수)를 기록한다. 수정 요청이면 반영 후 1부터 반복한다.

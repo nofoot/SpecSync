@@ -11,7 +11,7 @@
 
 ## 1. 검토자 결정
 
-1. principles의 `reviewers`에 에이전트 이름 목록이 있으면 그것을 쓴다.
+1. principles의 `reviewers`에 에이전트 이름 목록이 있으면 그것을 쓴다. 플러그인 기본 검토자가 아닌 에이전트의 frontmatter `tools`에 Write, Edit, NotebookEdit가 있거나 `tools`가 없으면 파일을 수정할 수 있다고, Bash나 MCP 도구가 있으면 DB 접속과 비밀 파일 접근이 가능하다고 경고한다.
 2. 없으면 프로젝트 `.claude/agents/*.md` 중 description이 계획·설계·품질·테스트·리뷰 관점인 에이전트를 고른다(최대 4명). frontmatter `tools`에 Write, Edit, NotebookEdit, Bash가 포함되거나 `tools`가 없어 모든 도구를 쓰는 에이전트는 자동 선택하지 않는다(파일 수정과 DB 접속을 막기 위해서다).
 3. 둘 다 없으면 플러그인 기본 검토자를 쓴다: `specsync:design-reviewer`, `specsync:test-reviewer`, `specsync:scope-reviewer`.
 
@@ -25,6 +25,7 @@
   - Spec 폴더 경로(spec.md, design.md, subtasks.md)와 `.specs/principles.md`
   - 자기 관점에서 실제 코드베이스를 확인하며 검토할 것. **파일을 수정하지 말 것**
   - principles의 `db_access`가 `direct`가 아니면 **DB에 접속하거나 DB CLI·MCP 도구를 쓰지 말 것**. 스키마는 코드와 마이그레이션 파일에서 확인할 것
+  - **비밀 파일(`rules.md`의 `## 보안 정보`와 principles `secret_paths`)을 읽거나 비밀 값을 출력하지 말 것**
   - 반환 형식: 지적 사항마다 `심각도(차단 | 주요 | 경미) / 대상(REQ·AC·Sub-task 키 또는 design 섹션) / 내용 / 제안`
 
 ## 3. 반영

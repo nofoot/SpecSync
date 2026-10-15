@@ -14,14 +14,15 @@
 4. 고른 Sub-task를 수행한다.
    - `status: in-progress`로 바꾼다.
    - `spec.md`의 해당 REQ/AC, `design.md`를 읽고 구현한다. 범위는 refs와 비목표를 넘지 않는다.
+   - 비밀 값·개인정보 노출 경로가 생기면 `rules.md`의 `## 보안 정보`에 따라 경고하고 보안 우선 대안으로 구현한다.
    - DB 조회·변경이 필요하면 직접 실행하지 않고 `rules.md`의 `## 데이터베이스` 쿼리 전달 절차를 따른다.
    - `verify` 명령을 실행한다. 실패하면 고쳐서 다시 실행한다. `manual:` verify는 쿼리나 절차를 사용자에게 주고 결과를 받아 `gates.md`의 `manual:` verify 형식으로 기록한다.
-   - 통과하면 `status: done`.
+   - 통과하면 `rules.md`의 `## 보안 정보` 유출 검사를 커밋 정책과 관계없이 수행한다. 문제가 없으면 `status: done`. 발견하면 고친 뒤 `verify`부터 다시 수행한다(`manual:` verify도 다시 확인받는다).
    - 아래 중단 조건에 해당하면 즉시 멈춘다.
-5. 커밋은 principles의 `commit` 정책을 따른다. 메시지 첫 줄은 `<Sub-task 키> <제목>`으로 쓴다.
+5. 커밋은 principles의 `commit` 정책을 따른다. 메시지 첫 줄은 `<Sub-task 키> <제목>`으로 쓴다. 커밋 메시지에도 비밀 값과 개인정보를 넣지 않는다.
    - `ask`: AskUserQuestion으로 커밋 여부를 묻는다.
    - `auto`: 바로 커밋한다.
-   - `off`: 커밋하지 않는다.
+   - `off`: 커밋하지 않는다. 유출 검사 결과를 알리고, 사용자가 직접 커밋할 때 비밀 파일이 포함되지 않게 주의하라고 안내한다.
 6. 중단 조건. 해당하면 구현을 멈추고 Sub-task를 `status: blocked`로 바꾼 뒤, Sub-task 아래에 `> blocked: <사유>`를 적고 보고한다. Spec을 바꿔야 하는 경우에도 변경안을 먼저 AskUserQuestion으로 결정받은 뒤에만 `amend.md`를 수행한다.
 
    | 조건 | 이후 처리 |

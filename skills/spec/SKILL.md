@@ -31,7 +31,7 @@ argument-hint: "[작업 설명 | Spec 키 [수정 내용] | 현황]"
 |---|---|---|
 | Spec 키(`<PREFIX>-n` 또는 `<PREFIX>-n.m`)를 포함하거나 기존 Spec 제목을 명확히 가리킴 | 해당 Spec | 2단계로 |
 | 키 없이 "현황", "목록", "status" 등 조회 요청 | 전체 | `status.md` |
-| principles 설정(검토 켜기·끄기, 검토자, `protected_paths`, 커밋 정책, `db_access` 등 frontmatter 설정) 변경 요청 | `.specs/principles.md` | `rules.md`의 `### principles 변경` |
+| principles 설정(검토 켜기·끄기, 검토자, `protected_paths`, 커밋 정책, `db_access`, `secret_paths` 등 frontmatter 설정) 변경 요청 | `.specs/principles.md` | `rules.md`의 `### principles 변경` |
 | 비어 있음 | draft·approved Spec | 1개면 그 Spec으로 2단계. 여러 개면 AskUserQuestion으로 선택(최대 4개). 0개면 `status.md` 후 무엇을 명세할지 묻는다 |
 | 그 외 새 작업·이슈·버그 설명 | 새 Spec | 방향이 정해지지 않았으면 `ideate.md` → `create.md`, 정해졌으면 `create.md` |
 

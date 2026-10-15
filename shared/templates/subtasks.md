@@ -7,7 +7,7 @@
   - refs: 이 Sub-task가 충족하는 REQ / AC ID (쉼표 구분)
   - blocked_by: 선행 Sub-task 키 (없으면 —)
   - files: 주로 변경할 파일 (쉼표 구분)
-  - verify: 완료를 확인하는 명령. 필수.
+  - verify: 완료를 확인하는 명령. 필수. 에이전트가 실행할 수 없는 확인(DB 상태 등)은 `manual: <확인 쿼리 파일 또는 절차>`로 쓴다.
 - 모든 AC는 1개 이상의 Sub-task refs에 포함되어야 planned로 전이할 수 있다.
 -->
 

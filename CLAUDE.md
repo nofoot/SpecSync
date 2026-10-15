@@ -34,7 +34,7 @@ SpecSync는 **Spec-Driven Development(SDD)를 지원하는 Claude Code 플러그
 Jira의 계층·워크플로 개념을 참고하되, 원본은 사용자 프로젝트의 로컬 `.specs/` 파일입니다. 외부 트래커 동기화는 하지 않으며, 추후 어댑터로 붙일 수 있게만 둡니다.
 
 - **계층:** Principles(`.specs/principles.md`) → Epic Spec → Spec(`story` | `bug` | `task`) → Sub-task
-  - Principles에는 SDD 전용 규칙(키 접두어, `commit`, `plan_review`, `reviewers`, `impl_review`, `impl_reviewers`, `protected_paths`, 검증 명령, 품질 게이트, 컴포넌트)만 둡니다. 프로젝트 고유 제약은 스테이지 문서에 하드코딩하지 말고 principles 설정으로 받습니다. 일반 컨벤션은 사용자 프로젝트의 `CLAUDE.md`에 둡니다.
+  - Principles에는 SDD 전용 규칙(키 접두어, `commit`, `plan_review`, `reviewers`, `impl_review`, `impl_reviewers`, `protected_paths`, `db_access`, 검증 명령, 품질 게이트, 컴포넌트)만 둡니다. 프로젝트 고유 제약은 스테이지 문서에 하드코딩하지 말고 principles 설정으로 받습니다. 일반 컨벤션은 사용자 프로젝트의 `CLAUDE.md`에 둡니다.
   - Epic은 목표와 하위 Spec 목록만 가지며 직접 구현되지 않습니다.
   - Spec = 사람이 승인하는 단위(독립 배포·검증 가능한 변화 1건). Sub-task = 기계가 검증하는 단위(세션 1회, 커밋 1개, `verify` 필수).
   - "Task"는 Spec 타입을 뜻합니다. 실행 단위는 반드시 "Sub-task"라고 부릅니다.
@@ -44,6 +44,7 @@ Jira의 계층·워크플로 개념을 참고하되, 원본은 사용자 프로�
   - Sub-task status: `todo | in-progress | done | blocked | dropped`. 중단된 in-progress를 먼저 재개하고, blocked는 사용자 결정(재시도/수정/보류)으로만 풀립니다. 불필요해진 Sub-task는 지우지 않고 dropped로 둡니다.
 - **메타데이터:** `spec.md` frontmatter에만 둡니다(`key`, `type`, `title`, `status`, `parent`, `priority`, `components`, `links.blocked_by`, `links.relates_to`, `created`, `approved_at`). Sprint, story point, 보드 개념은 의도적으로 제외합니다.
 - **거버넌스(`rules.md`의 `## 거버넌스`):** 개인·소규모 사용을 전제로 실행 코드 없이 지시문과 기록으로 운영합니다. 사람 게이트 승인·상태 되돌림·게이트 예외는 `## 변경 이력`에 `[승인]`/`[되돌림]`/`[예외]` 태그로 남기고, 이 기록이 없는 status는 "기록 없는 상태 변경"으로 감지합니다. `gates.md`의 `(예외 불가)` 항목은 예외로 건너뛸 수 없습니다. principles의 검토·보호 설정 변경은 확인을 받고 principles `## 변경 이력`에 기록합니다. 훅·CI로 강제하지 않는 것은 의도적인 선택입니다.
+- **DB 접근(`rules.md`의 `## 데이터베이스`):** 기본값 `db_access: manual`에서는 에이전트가 DB에 직접 연결해 CRUD(조회 포함)하지 않습니다. 쿼리를 `.specs/<KEY>-<slug>/queries/`에 저장해 사용자에게 주고, 결과를 Sub-task 아래 `> db:`로 기록합니다. DB 확인이 필요한 verify는 `manual:`로 쓰고 `> verified:` 기록으로 통과합니다.
 - **추적성:** REQ → Sub-task(`refs`) → 커밋(메시지 첫 줄에 Sub-task 키)으로 이어지는 ID 추적으로 Spec과 코드의 불일치를 감지합니다.
 
 ### Spec 파일 형식

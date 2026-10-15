@@ -11,6 +11,9 @@
   - epic의 하위 Spec: `## 하위 Spec` 표의 행.
   - 계획 검토 결과: design.md `## 계획 검토`의 마지막 회차에 있는 `- blocking_open: n`, `- pending_decisions: n` 필드.
   - 구현 검토 결과: spec.md `## 구현 검토`의 마지막 회차에 있는 같은 두 필드.
+- `manual:` verify: `verify: manual: <확인 쿼리 파일 또는 절차>` 형식으로, 에이전트가 실행할 수 없어 사용자가 확인하는 verify다. 확인 결과는 Sub-task 아래 `> verified: <YYYY-MM-DD HH:MM> 사용자 확인 — <결과 요약>`으로 기록한다. 관련 파일(이 Sub-task와 `blocked_by`로 이어진 선행 Sub-task의 `files`, 마이그레이션·스키마 정의 파일, Spec의 `queries/`)이 기록 시각 이후 바뀌지 않았으면 유효하다. 다음 중 하나라도 해당하면 유효하지 않다.
+  - 기록 시각 이후의 커밋 중 이 Sub-task 자신의 커밋(메시지 첫 줄이 이 Sub-task 키)을 뺀 커밋이 관련 파일을 바꿨다.
+  - 커밋되지 않은 관련 파일의 수정 시각이 기록 시각보다 늦다.
 
 ## draft → approved
 
@@ -42,7 +45,7 @@ epic
 ## in-progress → in-review
 
 - [ ] dropped를 제외한 모든 Sub-task가 `status: done` (예외 불가)
-- [ ] 이번 실행에서 모든 Sub-task의 `verify`를 다시 실행해 통과함 (예외 불가)
+- [ ] 이번 실행에서 모든 Sub-task의 `verify`를 다시 실행해 통과함. `manual:` verify는 유효한 `> verified:` 기록이 있음(위 파싱 규칙) (예외 불가)
 
 ## in-review → done
 

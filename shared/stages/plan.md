@@ -14,7 +14,8 @@
 2. `templates/design.md`로 `design.md`를 작성한다. bug는 원인과 수정 방법이 자명하면 생략할 수 있다.
 3. `templates/subtasks.md`로 `subtasks.md`를 작성한다.
    - Sub-task 1개 = 세션 1회 = 커밋 1개. 서로 무관한 영역은 나눈다.
-   - 각 Sub-task에 `refs`, `blocked_by`, `files`, `verify`를 채운다. `verify`에는 principles의 검증 명령을 기준으로 실제 실행 가능한 명령을 쓴다.
+   - 각 Sub-task에 `refs`, `blocked_by`, `files`, `verify`를 채운다. `verify`에는 principles의 검증 명령을 기준으로 실제 실행 가능한 명령을 쓴다. `rules.md`의 `## 데이터베이스`에 따라 에이전트가 실행할 수 없는 확인(DB 상태 확인 등)은 `manual: <확인 쿼리 파일 또는 절차>`로 쓴다.
+   - DB 적용·데이터 변경이 필요하면 그 작업을 별도 Sub-task로 두고 쿼리 파일을 `files`에 적는다.
    - Sub-task가 15개를 넘으면 epic으로 나누자고 제안한다.
 4. `plan-review.md`를 수행한다(적용 대상이 아니면 생략).
 

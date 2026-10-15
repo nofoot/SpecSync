@@ -6,6 +6,7 @@ reviewers: []      # 계획 검토 에이전트 이름(플러그인 에이전트
 impl_review: on    # on | off — 구현 완료 후 독립 에이전트의 구현 검토
 impl_reviewers: [] # 구현 검토 에이전트 이름. 비우면 specsync:implementation-reviewer
 protected_paths: [] # 구현 중 수정 금지 경로(glob). 수정이 필요하면 멈추고 사용자 결정을 받음
+db_access: manual  # manual | direct — manual이면 에이전트가 DB에 직접 연결하지 않고 쿼리를 사용자에게 주어 실행하게 함
 ---
 
 # Principles

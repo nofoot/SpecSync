@@ -21,7 +21,7 @@ SpecSync는 **Spec-Driven Development(SDD)를 지원하는 Claude Code 플러그
 - `shared/rules.md` — 두 커맨드 공통 규칙(커맨드 역할 분담, 경로 해석, 사람 게이트, 의사결정성 변경 자동 반영 금지, 상태 갱신).
 - `shared/stages/*.md` — 단계 절차. `init`(principles 생성), `ideate`(발산/수렴), `create`, `clarify`(draft→approved), `plan`(approved→planned), `plan-review`(에이전트 패널 검토), `implement`(중단 조건 포함), `review`(in-review→done), `amend`, `status`, `gates`(전이 검사 규칙).
 - `shared/templates/` — `spec.{story,bug,epic,task}.md`, `design.md`, `subtasks.md`, `principles.md`. 자리표시자는 `{{key}}`, `{{title}}`, `{{parent}}`, `{{date}}`, `{{prefix}}` 형식입니다.
-- `agents/` — 기본 계획 검토자(`design-reviewer`, `test-reviewer`, `scope-reviewer`, 읽기 전용). 호출 이름은 `specsync:<name>`. 검토자는 principles `reviewers` → 프로젝트 `.claude/agents/` → 이 기본 검토자 순으로 결정됩니다.
+- `agents/` — 기본 계획 검토자(`design-reviewer`, `test-reviewer`, `scope-reviewer`, 읽기 전용)와 구현 검토자(`implementation-reviewer`, 파일 수정 없음, Bash는 git 조회만). 호출 이름은 `specsync:<name>`. 계획 검토자는 principles `reviewers` → 프로젝트 `.claude/agents/` → 기본 검토자 순으로, 구현 검토자는 principles `impl_reviewers` → `implementation-reviewer` 순으로 결정됩니다. 구현을 맡은 메인 에이전트가 자기 결과를 스스로 승인하지 않도록 review 단계에서 구현 검토자를 Agent 도구로 호출합니다.
 
 `reference/`는 이 설계의 참고 자료(다른 프로젝트의 `/plan:*` 커맨드 세트)이며 플러그인 소스가 아닙니다. 수정하지 마세요. 시간 추정, 이모지 우선순위, HTML 주석 기반 상태 추정, MCDA 평가 게이트는 의도적으로 가져오지 않았습니다.
 
@@ -34,7 +34,7 @@ SpecSync는 **Spec-Driven Development(SDD)를 지원하는 Claude Code 플러그
 Jira의 계층·워크플로 개념을 참고하되, 원본은 사용자 프로젝트의 로컬 `.specs/` 파일입니다. 외부 트래커 동기화는 하지 않으며, 추후 어댑터로 붙일 수 있게만 둡니다.
 
 - **계층:** Principles(`.specs/principles.md`) → Epic Spec → Spec(`story` | `bug` | `task`) → Sub-task
-  - Principles에는 SDD 전용 규칙(키 접두어, `commit`, `plan_review`, `reviewers`, `protected_paths`, 검증 명령, 품질 게이트, 컴포넌트)만 둡니다. 프로젝트 고유 제약은 스테이지 문서에 하드코딩하지 말고 principles 설정으로 받습니다. 일반 컨벤션은 사용자 프로젝트의 `CLAUDE.md`에 둡니다.
+  - Principles에는 SDD 전용 규칙(키 접두어, `commit`, `plan_review`, `reviewers`, `impl_review`, `impl_reviewers`, `protected_paths`, 검증 명령, 품질 게이트, 컴포넌트)만 둡니다. 프로젝트 고유 제약은 스테이지 문서에 하드코딩하지 말고 principles 설정으로 받습니다. 일반 컨벤션은 사용자 프로젝트의 `CLAUDE.md`에 둡니다.
   - Epic은 목표와 하위 Spec 목록만 가지며 직접 구현되지 않습니다.
   - Spec = 사람이 승인하는 단위(독립 배포·검증 가능한 변화 1건). Sub-task = 기계가 검증하는 단위(세션 1회, 커밋 1개, `verify` 필수).
   - "Task"는 Spec 타입을 뜻합니다. 실행 단위는 반드시 "Sub-task"라고 부릅니다.
@@ -50,7 +50,7 @@ Jira의 계층·워크플로 개념을 참고하되, 원본은 사용자 프로�
 - 타입별 파일: epic은 `spec.md`만, story는 `spec.md` + `design.md` + `subtasks.md`, bug는 `design.md` 선택, task는 `spec.md` 안에 `## Sub-tasks` 섹션.
 - 요구사항은 `### REQ-n` 아래에 EARS 문장, 수용 기준은 `- AC-n.m Given / When / Then`(bug의 회귀 AC는 `[regression]` 태그), 미해결 질문은 `- [ ] Qn`.
 - Sub-task는 `### <KEY>.n 제목` 아래에 `- status|refs|blocked_by|files|verify: 값` 필드.
-- 파싱은 HTML 주석을 제거한 뒤, 섹션 제목 문구가 아니라 **ID와 필드 키에 의존**합니다. 예외는 `gates.md`에 명시된 세 곳(`## Sub-tasks`, `## 하위 Spec` 표, `## 계획 검토`의 `blocking_open`/`pending_decisions`)뿐이므로 이 제목들은 바꾸지 마세요. 빈 값·`—`·빈 코드 스팬은 값 없음입니다.
+- 파싱은 HTML 주석을 제거한 뒤, 섹션 제목 문구가 아니라 **ID와 필드 키에 의존**합니다. 예외는 `gates.md`에 명시된 네 곳(`## Sub-tasks`, `## 하위 Spec` 표, `## 계획 검토`와 `## 구현 검토`의 `blocking_open`/`pending_decisions`)뿐이므로 이 제목들은 바꾸지 마세요. 빈 값·`—`·빈 코드 스팬은 값 없음입니다.
 
 ## 환경 참고
 

@@ -3,6 +3,8 @@ key_prefix: {{prefix}}
 commit: ask        # ask | auto | off — Sub-task 완료 시 커밋 정책
 plan_review: on    # on | off — 설계·Sub-task 작성 후 에이전트 패널 검토
 reviewers: []      # 계획 검토 에이전트 이름(플러그인 에이전트는 specsync:design-reviewer 형식). 비우면 .claude/agents/의 읽기 전용 에이전트 → 플러그인 기본 검토자 순
+impl_review: on    # on | off — 구현 완료 후 독립 에이전트의 구현 검토
+impl_reviewers: [] # 구현 검토 에이전트 이름. 비우면 specsync:implementation-reviewer
 protected_paths: [] # 구현 중 수정 금지 경로(glob). 수정이 필요하면 멈추고 사용자 결정을 받음
 ---
 

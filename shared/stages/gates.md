@@ -10,6 +10,7 @@
   - task 타입의 Sub-task: `spec.md`의 `## Sub-tasks` 아래. 그 외 타입은 `subtasks.md`.
   - epic의 하위 Spec: `## 하위 Spec` 표의 행.
   - 계획 검토 결과: design.md `## 계획 검토`의 마지막 회차에 있는 `- blocking_open: n`, `- pending_decisions: n` 필드.
+  - 구현 검토 결과: spec.md `## 구현 검토`의 마지막 회차에 있는 같은 두 필드.
 
 ## draft → approved
 
@@ -42,5 +43,16 @@ epic
 
 - [ ] dropped를 제외한 모든 Sub-task가 `status: done`
 - [ ] 이번 실행에서 모든 Sub-task의 `verify`를 다시 실행해 통과함
+
+## in-review → done
+
+story / bug / task
+- [ ] dropped를 제외한 모든 Sub-task가 `status: done`
+- [ ] 모든 AC에 충족 근거가 있음
+- [ ] principles의 `impl_review`가 off가 아니면 `## 구현 검토` 마지막 회차가 있고 `blocking_open: 0`, `pending_decisions: 0`
+
+epic
+- [ ] `## 하위 Spec` 표의 모든 하위 Spec이 `status: done`
+- [ ] `## 완료 조건`의 모든 항목에 충족 근거가 있음
 
 검사 결과는 항목별 통과/실패로 보여준다.

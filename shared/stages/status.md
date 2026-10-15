@@ -15,4 +15,4 @@ Spec 목록을 epic 기준으로 묶어 표로 보여준다.
 
 ## Spec 하나
 
-해당 Spec의 상태, 미해결 질문 수, Sub-task 목록(키, 제목, status, blocked 사유), 마지막 계획 검토 결과를 보여주고, 다음에 실행할 커맨드와 진행될 단계를 알려준다(draft·approved는 `/spec <KEY>`, planned 이후는 `/execute <KEY>`). epic이면 하위 Spec 표를 보여준다.
+해당 Spec의 상태, 미해결 질문 수, Sub-task 목록(키, 제목, status, blocked 사유), 마지막 계획 검토 결과, (in-review 이후면) 마지막 구현 검토 결과를 보여주고, 다음에 실행할 커맨드와 진행될 단계를 알려준다(draft·approved는 `/spec <KEY>`, planned 이후는 `/execute <KEY>`). epic이면 하위 Spec 표를 보여준다.

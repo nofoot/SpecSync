@@ -2,7 +2,7 @@
 
 ## story / bug / task
 
-1. 모든 Sub-task의 `verify`를 다시 실행한다(`manual:` verify는 `gates.md`의 유효 조건으로 판단하고, 유효하지 않으면 다시 확인받는다).
+1. 모든 Sub-task의 `verify`를 다시 실행한다(`manual:` verify는 `gates.md`의 유효 조건으로 판단하고, 유효하지 않으면 다시 확인받는다). implement 8단계에서 이어서 진입했고 그 뒤 파일 변경이 없으면 재실행을 생략하고 그 결과를 쓴다. `/execute`로 in-review Spec을 새로 처리할 때는 다시 실행한다.
 2. 구현 검토를 수행한다. principles의 `impl_review: off`이면 생략하고 3~5에서 메인 에이전트가 직접 AC 근거와 불일치를 점검한다(이때 4의 기록은 하지 않는다).
    1. 검토자를 정한다. principles의 `impl_reviewers`에 에이전트 이름 목록이 있으면 그것을, 없으면 `specsync:implementation-reviewer`를 쓴다. 사용할 검토자를 한 줄로 알린다. 플러그인 기본 검토자가 아닌 지정된 에이전트의 frontmatter `tools`에 Write, Edit, NotebookEdit가 있거나 `tools`가 없으면 파일을 수정할 수 있다고, `Bash`나 MCP 도구가 있으면 DB 접속과 비밀 파일 접근이 가능하다고 함께 경고한다.
    2. 변경 범위를 정한다. 커밋 메시지 첫 줄이 이 Spec의 Sub-task 키(`<KEY>.`)로 시작하는 커밋 목록을 기본으로 하고, 커밋하지 않은 변경이 있으면 작업 트리 변경도 포함한다.
@@ -26,12 +26,12 @@
    | AC 미충족, 명백한 결함, 누락된 테스트 | 수정 Sub-task 추가(아래) |
    | 비목표나 refs 범위를 넘어선 변경 | 되돌릴지 Spec에 반영할지 결정받는다. 되돌리기면 수정 Sub-task 추가, 반영이면 `amend.md` 2절 |
    | design.md와 구현의 차이(표현·세부 수준) | design.md를 실제에 맞게 고치고 `spec.md`의 `## 변경 이력`에 기록한다 |
-   | design.md와 인터페이스·동작이 다름 | 구현을 받아들일지 결정받는다. 받아들이면 `amend.md` 3절 1·3항으로 design.md를 고치고(4항의 계획 재검토는 하지 않는다), 아니면 수정 Sub-task 추가 |
+   | design.md와 인터페이스·동작이 다름 | 구현을 받아들일지 결정받는다. 받아들이면 `amend.md` 3절 1·3·4항으로 design.md를 고치고(5항의 계획 재검토는 하지 않는다), 아니면 수정 Sub-task 추가 |
    | 비밀 값·개인정보 노출 경로 | `rules.md`의 `## 보안 정보`에 따라 경고하고 보안 우선 대안으로 수정 Sub-task 추가. 그대로 두려면 결정받고 `[예외] 보안` 기록 |
    | 승인되지 않은 `protected_paths` 변경 | 허용 여부를 결정받는다. 허용되면 해당 Sub-task 아래 `> allowed: <경로>`를 기록하고, 아니면 수정 Sub-task 추가 |
    | 경미한 지적 | 기록만 하고 반영 여부는 6의 확인 때 함께 보여준다 |
 
-   **수정 Sub-task 추가:** `amend.md` 3절 1·3항을 따른다(3절 4항의 계획 재검토는 하지 않는다). 새 Sub-task는 최대 번호 + 1, `status: todo`, `refs`는 관련 AC, `verify`는 필수, `files`는 아는 만큼 채운다. 하나라도 추가했으면 Spec을 `status: in-progress`로 되돌리고 `[되돌림] in-review→in-progress`를 기록하고, 추가한 Sub-task와 남은 결정 사항을 보고한 뒤 멈춘다. `/execute <KEY>`로 구현하면 `implement.md` 8단계를 거쳐 이 문서를 다시 수행한다(새 회차).
+   **수정 Sub-task 추가:** `amend.md` 3절 1·3항을 따른다(3절 5항의 계획 재검토는 하지 않는다). 새 Sub-task는 최대 번호 + 1, `status: todo`, `refs`는 관련 AC, `verify`는 필수, `files`는 아는 만큼 채운다. 하나라도 추가했으면 Spec을 `status: in-progress`로 되돌리고 `[되돌림] in-review→in-progress`를 기록하고, 추가한 Sub-task와 남은 결정 사항을 보고한 뒤 멈춘다. `/execute <KEY>`로 구현하면 `implement.md` 8단계를 거쳐 이 문서를 다시 수행한다(새 회차).
 6. `gates.md`의 in-review → done 검사를 수행한 뒤, AC 충족 표, 불일치 점검 결과, 남은 경미한 지적을 보여주고 AskUserQuestion으로 완료를 확인받는다.
 7. 확인되면 `status: done`으로 바꾸고 `## 변경 이력`에 `[승인] in-review→done`(AC 충족 수, 예외 항목)을 기록한다.
 8. 부모 epic이 있으면 epic `spec.md`의 `## 하위 Spec` 표 상태를 갱신한다. 모든 하위 Spec이 done이면 epic을 `status: in-review`로 바꾸고 아래 epic 절을 이어서 수행한다.

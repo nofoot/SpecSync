@@ -19,8 +19,9 @@
 
 1. 해당 파일을 고친다. 새 Sub-task는 최대 번호 + 1로 추가하고, 불필요해진 미완료 Sub-task는 `status: dropped`로 바꾼다.
 2. 이 변경으로 원인이 해소된 `blocked` Sub-task는 `status: todo`로 되돌리고 blocked 메모를 지운다.
-3. 요구사항은 그대로이므로 status는 유지한다. 단 in-review에서 todo Sub-task가 생기면 `status: in-progress`로 바꾼다(구현 재개). 단 design.md의 접근 방식, 변경 영역, 인터페이스가 실질적으로 바뀌었으면 `spec.md`의 `## 변경 이력`에 기록한다.
-4. planned 이후라면:
+3. 요구사항은 그대로이므로 status는 유지한다. 단 in-review에서 todo Sub-task가 생기면 `status: in-progress`로 바꾼다(구현 재개).
+4. design.md의 접근 방식, 변경 영역, 인터페이스가 실질적으로 바뀌었으면 `spec.md`의 `## 변경 이력`에 기록한다.
+5. planned 이후라면:
    - 설계가 실질적으로 바뀌었고 plan-review 적용 대상이면 `plan-review.md`를 다시 수행한다(새 회차로 기록).
    - `gates.md`의 approved→planned 검사를 다시 수행하고, 결과를 보여준 뒤 AskUserQuestion으로 확인받는다.
 

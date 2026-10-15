@@ -26,6 +26,10 @@ approved_at: null
 
 - AC-1.1 Given <전제> / When <행동> / Then <결과>
 
+## 미해결 질문
+
+- [ ] Q1
+
 ## Sub-tasks
 
 ### {{key}}.1 {{Sub-task 제목}}

@@ -2,7 +2,7 @@
 
 <!-- 규칙
 - Sub-task 1개 = 에이전트 세션 1회 = 커밋 1개.
-- 필드는 `- key: value` 형식을 유지한다 (훅이 파싱함).
+- 필드는 `- key: value` 형식을 유지한다 (게이트 검사가 파싱함).
   - status: todo | in-progress | done | blocked | dropped (dropped는 사유를 한 줄 적는다)
   - refs: 이 Sub-task가 충족하는 REQ / AC ID (쉼표 구분)
   - blocked_by: 선행 Sub-task 키 (없으면 —)

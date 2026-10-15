@@ -42,6 +42,8 @@ argument-hint: "[Spec 키 | Sub-task 키]"
 | in-review | `review.md` | `review.md` |
 | done | 완료 요약을 보여준다 | 완료 요약을 보여준다 |
 
+epic은 in-progress를 거치지 않는다(planned → 하위 Spec 모두 done → in-review).
+
 ## 3. 실행 중 Spec 변경
 
 구현이나 리뷰 중 Spec을 바꿔야 하면(`implement.md` 중단 조건, `review.md` 불일치):

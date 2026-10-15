@@ -33,5 +33,5 @@
    | principles의 `protected_paths`에 속한 파일을 수정해야 함(Sub-task 아래 `> allowed: <경로>` 기록이 있는 경로는 제외) | 수정 허용 여부를 결정받는다. 허용되면 Sub-task 아래에 `> allowed: <경로>`를 기록하고 재시도, 아니면 대안을 `amend.md` 3절로 |
    | DB 조회·변경이 필요한데 사용자가 아직 실행하지 않았거나 실행을 거부함(`rules.md`의 `## 데이터베이스`) | 쿼리 전달 절차 3항에 따라 기록 |
    | 다른 Sub-task와 충돌(같은 코드를 상반되게 변경, 선행 Sub-task 결과가 전제와 다름) | 조정안 결정 → `amend.md` 3절 |
-7. Sub-task 1개를 끝내면 멈추고 진행 현황(done/전체, dropped 제외)을 보고한다. 남은 Sub-task가 있으면 다음 `/execute <KEY>` 실행 시 이어서 진행된다고 알린다.
+7. Sub-task 1개를 끝내면 진행 현황(done/전체, dropped 제외)을 보고한다. 남은 Sub-task가 있으면 멈추고 다음 `/execute <KEY>`에서 이어진다고 알린다. 없으면 8단계로 간다.
 8. dropped를 제외한 모든 Sub-task가 done이면 **모든 Sub-task의 `verify`를 다시 실행**한 뒤(`manual:` verify는 `gates.md`의 유효 조건을 만족하는 `> verified:` 기록으로 대신하고, 유효하지 않으면 다시 확인받는다) `gates.md`의 in-progress→in-review 검사를 수행한다. 통과하면 `status: in-review`로 바꾸고 `review.md`를 이어서 수행한다. 실패한 verify가 있으면 해당 Sub-task를 `todo`로 되돌리고 보고한다.

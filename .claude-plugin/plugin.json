@@ -1,0 +1,8 @@
+{
+  "name": "specsync",
+  "version": "0.1.0",
+  "description": "Spec-Driven Development: 하나의 /spec 커맨드로 명세서 생성부터 승인, 설계, 구현, 리뷰까지 진행",
+  "author": {
+    "name": "derek"
+  }
+}

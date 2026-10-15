@@ -10,4 +10,4 @@
 4. 통과하면 Spec 요약을 보여주고 AskUserQuestion으로 승인을 묻는다.
    - story/bug/task: 목표, REQ/AC 목록, 비목표
    - epic: 목표, 범위, 하위 Spec 후보, 완료 조건
-5. 승인되면 `status: approved`, `approved_at: <오늘>`로 바꾸고 `plan.md`를 이어서 수행한다. 수정 요청이면 반영 후 3부터 반복한다.
+5. 승인되면 `status: approved`, `approved_at: <오늘>`로 바꾸고 `## 변경 이력`에 `[승인] draft→approved`(REQ·AC 수)를 기록한 뒤 `plan.md`를 이어서 수행한다. 수정 요청이면 반영 후 3부터 반복한다.

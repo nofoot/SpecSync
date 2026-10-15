@@ -30,13 +30,14 @@
    | 승인되지 않은 `protected_paths` 변경 | 허용 여부를 결정받는다. 허용되면 해당 Sub-task 아래 `> allowed: <경로>`를 기록하고, 아니면 수정 Sub-task 추가 |
    | 경미한 지적 | 기록만 하고 반영 여부는 6의 확인 때 함께 보여준다 |
 
-   **수정 Sub-task 추가:** `amend.md` 3절 1·3항을 따른다(3절 4항의 계획 재검토는 하지 않는다). 새 Sub-task는 최대 번호 + 1, `status: todo`, `refs`는 관련 AC, `verify`는 필수, `files`는 아는 만큼 채운다. 하나라도 추가했으면 Spec을 `status: in-progress`로 되돌리고, 추가한 Sub-task와 남은 결정 사항을 보고한 뒤 멈춘다. `/execute <KEY>`로 구현하면 `implement.md` 8단계를 거쳐 이 문서를 다시 수행한다(새 회차).
+   **수정 Sub-task 추가:** `amend.md` 3절 1·3항을 따른다(3절 4항의 계획 재검토는 하지 않는다). 새 Sub-task는 최대 번호 + 1, `status: todo`, `refs`는 관련 AC, `verify`는 필수, `files`는 아는 만큼 채운다. 하나라도 추가했으면 Spec을 `status: in-progress`로 되돌리고 `[되돌림] in-review→in-progress`를 기록하고, 추가한 Sub-task와 남은 결정 사항을 보고한 뒤 멈춘다. `/execute <KEY>`로 구현하면 `implement.md` 8단계를 거쳐 이 문서를 다시 수행한다(새 회차).
 6. `gates.md`의 in-review → done 검사를 수행한 뒤, AC 충족 표, 불일치 점검 결과, 남은 경미한 지적을 보여주고 AskUserQuestion으로 완료를 확인받는다.
-7. 확인되면 `status: done`.
+7. 확인되면 `status: done`으로 바꾸고 `## 변경 이력`에 `[승인] in-review→done`(AC 충족 수, 예외 항목)을 기록한다.
 8. 부모 epic이 있으면 epic `spec.md`의 `## 하위 Spec` 표 상태를 갱신한다. 모든 하위 Spec이 done이면 epic을 `status: in-review`로 바꾸고 아래 epic 절을 이어서 수행한다.
 
 ## epic
 
 1. `gates.md`의 in-review → done epic 검사를 수행한다(하위 Spec이 모두 done인지, `## 완료 조건`이 충족되는지).
 2. 하위 Spec 목록과 완료 조건별 충족 근거를 보여주고 AskUserQuestion으로 완료를 확인받는다.
-3. 확인되면 `status: done`. 미충족 조건이 있으면 그것을 다룰 하위 Spec 추가를 제안한다. 추가가 결정되면 `plan.md` epic 2~3단계와 같은 방식(`create.md` 1~2절로 생성, `## 하위 Spec` 표 갱신)으로 만들고 epic을 `planned`로 되돌린다.
+3. 미충족 조건이 없고 확인되면 `status: done`으로 바꾸고 `[승인] in-review→done`을 기록한다.
+4. 미충족 조건이 있으면 done으로 바꾸지 않고, 그것을 다룰 하위 Spec 추가를 제안한다. 추가가 결정되면 `plan.md` epic 2~3단계와 같은 방식(`create.md` 1~2절로 생성, `## 하위 Spec` 표 갱신)으로 만들고 epic을 in-review에서 `planned`로 되돌린 뒤 `[되돌림] in-review→planned`를 기록한다.

@@ -27,7 +27,7 @@
 1. `## 하위 Spec` 후보 목록(제목, 타입)을 보여주고 AskUserQuestion으로 확인받는다. 이것이 epic의 →planned 게이트다. 수정 요청이면 목록을 고친 뒤 다시 묻는다.
 2. 확인되면 각 후보에 대해 `create.md`의 1~2절만 수행해 하위 Spec 파일을 만든다(`parent`는 epic 키). 하위 Spec의 clarify로 이어가지 않는다. 각자 draft에서 시작한다.
 3. 표에 키와 상태를 채운다.
-4. `gates.md`의 approved→planned 검사를 수행하고 통과하면 `status: planned`. 먼저 작성할 하위 Spec을 `/spec <하위 키>`로 추천한다.
+4. `gates.md`의 approved→planned 검사를 수행하고 통과하면 `status: planned`로 바꾸고 `[승인] approved→planned`(하위 Spec 수)를 기록한다. 하위 Spec 후보 확인(1단계)이 이 전이의 승인이다. 먼저 작성할 하위 Spec을 `/spec <하위 키>`로 추천한다.
 
 ## 게이트 (story / bug / task)
 
@@ -35,4 +35,4 @@
    - 기계적 결함(refs 누락, verify 누락, 존재하지 않는 키 참조, 순환)은 고친다.
    - 계획 검토의 차단 이슈나 미결정 항목은 `plan-review.md` 3절의 해결 절차를 따른다.
 2. 설계 요지와 Sub-task 목록(키, 제목, refs, blocked_by)을 보여주고 AskUserQuestion으로 확인받는다.
-3. 확인되면 `status: planned`. 수정 요청이면 반영 후 1부터 반복한다.
+3. 확인되면 `status: planned`로 바꾸고 `## 변경 이력`에 `[승인] approved→planned`(Sub-task 수)를 기록한다. 수정 요청이면 반영 후 1부터 반복한다.

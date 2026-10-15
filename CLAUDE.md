@@ -43,6 +43,7 @@ Jira의 계층·워크플로 개념을 참고하되, 원본은 사용자 프로�
   - Epic: draft→approved(후보·완료 조건 검사) → approved→planned(후보 확인 후 하위 Spec을 draft로 생성만 함) → 하위 Spec 전부 done이면 in-review → done.
   - Sub-task status: `todo | in-progress | done | blocked | dropped`. 중단된 in-progress를 먼저 재개하고, blocked는 사용자 결정(재시도/수정/보류)으로만 풀립니다. 불필요해진 Sub-task는 지우지 않고 dropped로 둡니다.
 - **메타데이터:** `spec.md` frontmatter에만 둡니다(`key`, `type`, `title`, `status`, `parent`, `priority`, `components`, `links.blocked_by`, `links.relates_to`, `created`, `approved_at`). Sprint, story point, 보드 개념은 의도적으로 제외합니다.
+- **거버넌스(`rules.md`의 `## 거버넌스`):** 개인·소규모 사용을 전제로 실행 코드 없이 지시문과 기록으로 운영합니다. 사람 게이트 승인·상태 되돌림·게이트 예외는 `## 변경 이력`에 `[승인]`/`[되돌림]`/`[예외]` 태그로 남기고, 이 기록이 없는 status는 "기록 없는 상태 변경"으로 감지합니다. `gates.md`의 `(예외 불가)` 항목은 예외로 건너뛸 수 없습니다. principles의 검토·보호 설정 변경은 확인을 받고 principles `## 변경 이력`에 기록합니다. 훅·CI로 강제하지 않는 것은 의도적인 선택입니다.
 - **추적성:** REQ → Sub-task(`refs`) → 커밋(메시지 첫 줄에 Sub-task 키)으로 이어지는 ID 추적으로 Spec과 코드의 불일치를 감지합니다.
 
 ### Spec 파일 형식

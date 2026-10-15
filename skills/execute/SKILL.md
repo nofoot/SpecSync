@@ -31,7 +31,7 @@ argument-hint: "[Spec 키 | Sub-task 키]"
 | Spec 키(`<PREFIX>-n`) 또는 기존 Spec 제목 | 해당 Spec |
 | 비어 있음 | planned·in-progress·in-review인 Spec. 1개면 그것. 여러 개면 AskUserQuestion으로 선택(in-progress 우선, 최대 4개). 0개면 `status.md` 후 `/spec`으로 실행할 Spec을 먼저 만들라고 안내 |
 
-입력에 키 외의 내용이 있고 그것이 Spec을 바꾸려는 요청이면 처리하지 않고 `/spec <KEY> <수정 내용>`으로 안내한다.
+입력에 키 외의 내용이 있고 그것이 Spec을 바꾸려는 요청이면 처리하지 않고 `/spec <KEY> <수정 내용>`으로 안내한다. principles 설정 변경 요청이면 처리하지 않고 `/spec`으로 안내한다.
 
 ## 2. 상태별 처리
 

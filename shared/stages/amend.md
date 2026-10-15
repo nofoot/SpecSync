@@ -11,7 +11,7 @@
 ## 2. 요구사항 변경
 
 1. `spec.md`를 고치고 `## 변경 이력`에 `<날짜> <변경 요약>`을 추가한다.
-2. 상태가 approved 이후라면 `status: draft`로 되돌린다.
+2. 상태가 approved 이후라면 `status: draft`로 되돌리고 `## 변경 이력`에 `[되돌림] <이전>→draft`를 기록한다(`rules.md`의 이력 태그).
 3. 영향받는 Sub-task(refs가 바뀐 REQ/AC를 가리키는 것)를 목록으로 보여준다. done Sub-task는 그대로 두고, 재작업은 재계획 때 새 Sub-task로 추가된다(`plan.md`의 재계획 규칙).
 4. `/spec`에서 호출됐으면 `clarify.md`를 이어서 수행한다(재승인 → 재계획). `/execute`에서 호출됐으면 여기서 멈추고 `/spec <KEY>`로 재승인하라고 안내한다.
 
